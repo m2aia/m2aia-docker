@@ -1,4 +1,4 @@
-FROM m2aia/m2aia-novnc-base
+FROM m2aia/m2aia-no-vnc-base
 
 ARG ELASTIX_VERSION="5.0.0"
 ENV ELASTIX_VERSION=$ELASTIX_VERSION
