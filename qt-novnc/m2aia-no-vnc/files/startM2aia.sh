@@ -1,20 +1,27 @@
 echo '==============================='
 echo 'Run an awesome M2aia Application'
 echo '==============================='
-env QTWEBENGINE_DISABLE_SANDBOX=1 /m2aia/M2aiaWorkbench.sh &
-PID=$!
+# provide writable directory for logs
+kdir /root/.local
+chown -R root:m2aia /root/.local
+chmod -R g+rwx m2aia /root/.local
+
+su m2aia -c "env QTWEBENGINE_DISABLE_SANDBOX=1 /m2aia/M2aiaWorkbench.sh &" -m m2aia
 # wait until Workbench is ready
 tail -f  /root/Desktop/logfile | while read LOGLINE
 do
 	[[ "${LOGLINE}" == *"BlueBerry Workbench ready"* ]] && pkill -P $$ tail
 done
+
 echo 'Setting fullscreen mode'
 wmctrl -r 'Spectrum Imaging Perspective' -b toggle,fullscreen
-# wait for process to end, before starting new process
-wait $PID
-#clear logfile
-> /root/Desktop/logfile
+PID=$(pgrep M2aiaWorkbench.)
 
+# wait for process to end, before starting new process
+tail --pid=$PID -f /dev/null
+#clear logfile
+
+echo $PID > /root/Desktop/logfile
 # kill the container
 kill 1
 
