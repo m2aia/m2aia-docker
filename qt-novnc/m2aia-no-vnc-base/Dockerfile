@@ -1,8 +1,6 @@
 FROM dorowu/ubuntu-desktop-lxde-vnc:focal
-#FROM no-vnc-bas-gpu:latest
 
-LABEL IMAGE="m2aia-no-vnc-base"
-LABEL VERSION="v2021.07.00"
+RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 4EB27DB2A3B88B8B
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
     ca-certificates \
