@@ -11,7 +11,7 @@ RUN tar -xvjf /src/elastix.tar.bz2 -C /usr/ && rm -rf /src/elastix.tar.bz2
 # RUN wget https://github.com/jtfcordes/M2aia/releases/download/v${M2AIA_BASE_VERSION}.00/M2aia-${M2AIA_BASE_VERSION}.${M2AIA_PATCH_VERSION}-linux-x86_64.tar.gz -O /src/m2aia.tar.gz
 
 # use build image
-COPY --from=m2aia/m2aia-build:v2022_04 /opt/packages/m2aia.tar.gz /src/m2aia.tar.gz
+COPY --from=m2aia/m2aia-build:latest /opt/packages/m2aia.tar.gz /src/m2aia.tar.gz
 RUN tar -xzf /src/m2aia.tar.gz --strip 1 -C /m2aia/ && rm -rf /src/m2aia.tar.gz
 
 # Application start definition, here a shell script is used to start the application
