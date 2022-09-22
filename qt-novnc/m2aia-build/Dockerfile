@@ -1,4 +1,4 @@
-ARG BASE_IMAGE=ubuntu:latest
+ARG BASE_IMAGE=ubuntu:focal
 
 FROM ${BASE_IMAGE} as base
 
