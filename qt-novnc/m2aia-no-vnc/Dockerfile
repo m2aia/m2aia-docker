@@ -24,3 +24,4 @@ EXPOSE 80
 
 # A supervisord config is used to make the application managed
 COPY files/supervisord.conf /etc/supervisor/conf.d/
+ENV USER=m2aia

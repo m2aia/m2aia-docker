@@ -2,7 +2,7 @@ echo '==============================='
 echo 'Run an awesome M2aia Application'
 echo '==============================='
 # provide writable directory for logs
-kdir /root/.local
+mkdir /root/.local
 chown -R root:m2aia /root/.local
 chmod -R g+rwx m2aia /root/.local
 
