@@ -2,11 +2,7 @@ echo '==============================='
 echo 'Run an awesome M2aia Application'
 echo '==============================='
 # provide writable directory for logs
-mkdir /root/.local
-chown -R root:m2aia /root/.local
-chmod -R g+rwx m2aia /root/.local
-
-su m2aia -c "env QTWEBENGINE_DISABLE_SANDBOX=1 /m2aia/M2aiaWorkbench.sh &" -m m2aia
+env QTWEBENGINE_DISABLE_SANDBOX=1 /m2aia/M2aiaWorkbench.sh &
 # wait until Workbench is ready
 tail -f  /root/Desktop/logfile | while read LOGLINE
 do
