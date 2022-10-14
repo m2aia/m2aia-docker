@@ -66,11 +66,8 @@ RUN curl --silent --location -o cmake-installer.sh https://cmake.org/files/v${CM
 
 # Configure M2aia
 FROM base AS m2aia-config
-RUN git clone https://github.com/jtfcordes/m2aia
-RUN git clone https://github.com/mitk/mitk
-
-WORKDIR /opt/mitk
-RUN git checkout $(head -n 1 /opt/m2aia/mitk-version.info) && git apply /opt/m2aia/Patch/mitk.diff
+RUN git clone https://github.com/m2aia/m2aia
+RUN git clone https://github.com/m2aia/mitk
 
 RUN mkdir -p /opt/build
 WORKDIR /opt/build
