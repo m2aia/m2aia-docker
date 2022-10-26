@@ -50,6 +50,7 @@ RUN apt-get install -q -y --no-install-recommends \
     qtxmlpatterns5-dev-tools \
     libqt5webengine-data \
     libfontconfig1-dev \ 
+    qtmultimedia5-dev \
     libdbus-1-3 \
     doxygen \
     libopenslide-dev \
