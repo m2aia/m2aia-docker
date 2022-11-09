@@ -32,6 +32,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     at-spi2-core  \
     gedit \
     libopenslide-dev \
+    ffmpeg \
     && rm -rf /var/lib/apt/lists/*
 
 COPY files/startup.sh /startup.sh
