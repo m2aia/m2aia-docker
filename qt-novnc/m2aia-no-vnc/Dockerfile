@@ -7,12 +7,6 @@ RUN mkdir -p /src /m2aia
 RUN wget https://github.com/SuperElastix/elastix/releases/download/${ELASTIX_VERSION}/elastix-${ELASTIX_VERSION}-linux.tar.bz2 -O /src/elastix.tar.bz2
 RUN tar -xvjf /src/elastix.tar.bz2 -C /usr/ && rm -rf /src/elastix.tar.bz2
 
-RUN echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selections 
-RUN apt-get update
-RUN apt-get install -q -y --no-install-recommends \
-    ffmpeg \
-    && rm -rf /var/lib/apt/lists/*
-
 # use github release
 # RUN wget https://github.com/jtfcordes/M2aia/releases/download/v${M2AIA_BASE_VERSION}.00/M2aia-${M2AIA_BASE_VERSION}.${M2AIA_PATCH_VERSION}-linux-x86_64.tar.gz -O /src/m2aia.tar.gz
 
