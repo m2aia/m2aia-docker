@@ -67,6 +67,8 @@ RUN mkdir -p /opt/build
 WORKDIR /opt/build
 RUN cmake -G Ninja \
     -DCMAKE_BUILD_TYPE:STRING=${CMAKE_BUILD_TYPE} \
-    -DBUILD_TESTING:BOOL=${BUILD_TESTING}
+    -DBUILD_TESTING:BOOL=${BUILD_TESTING} \
+    -S /opt/mitk \
+    -B /opt/build
     
 RUN cmake --build .
