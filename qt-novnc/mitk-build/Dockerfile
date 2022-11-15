@@ -72,3 +72,11 @@ RUN cmake -G Ninja \
     -B /opt/build
     
 RUN cmake --build .
+
+# MITK package
+WORKDIR /opt/build/MITK-build/
+RUN cmake --build . --target package
+
+RUN mkdir -p /opt/packages
+RUN cp /opt/build/MITK-build/*.tar.gz /opt/packages/mitk.tar.gz
+RUN rm /opt/build/MITK-build/Mitk*.tar.gz

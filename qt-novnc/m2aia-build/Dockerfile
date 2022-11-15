@@ -26,6 +26,3 @@ RUN cmake --build . --target package
 
 RUN mkdir -p /opt/packages
 RUN cp /opt/build/MITK-build/*.tar.gz /opt/packages/m2aia.tar.gz
-WORKDIR /opt/packages
-
-VOLUME [ "/opt/packages" ]
