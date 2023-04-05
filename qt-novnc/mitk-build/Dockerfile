@@ -62,16 +62,29 @@ RUN curl --silent --location -o cmake-installer.sh https://cmake.org/files/v${CM
 FROM base AS mitk-config
 RUN mkdir -p /opt/mitk
 RUN git clone https://github.com/m2aia/mitk /opt/mitk
+RUN git clone https://github.com/m2aia/mitk-elastix /opt/mitk-elastix
 
 RUN mkdir -p /opt/build
 WORKDIR /opt/build
 RUN cmake -G Ninja \
     -DCMAKE_BUILD_TYPE:STRING=${CMAKE_BUILD_TYPE} \
     -DBUILD_TESTING:BOOL=${BUILD_TESTING} \
+    -DMITK_EXTENSION_DIRS:STRING=/opt/mitk-elastix . \
+    -DMITK_BUILD_CONFIGURATION=WorkbenchRelease \
+    -DMITK_USE_MatchPoint:BOOL=ON \
     -S /opt/mitk \
     -B /opt/build
     
-RUN cmake --build .
+RUN cmake --build . --parallel --target ITK
+RUN cmake --build . --parallel --target VTK
+RUN cmake --build . --parallel
+
+# RUN cmake \
+    
+#     -S /opt/mitk \
+#     -B /opt/build
+
+# RUN cmake --build .
 
 # MITK package
 WORKDIR /opt/build/MITK-build/
@@ -79,4 +92,4 @@ RUN cmake --build . --target package
 
 RUN mkdir -p /opt/packages
 RUN cp /opt/build/MITK-build/*.tar.gz /opt/packages/mitk.tar.gz
-RUN rm /opt/build/MITK-build/Mitk*.tar.gz
+RUN rm /opt/build/MITK-build/MITK*.tar.gz

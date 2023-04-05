@@ -1,5 +1,5 @@
 
-all: mitk m2aia package vnc-base vnc
+all: mitk m2aia package vnc-base m2aia-vnc mitk-vnc
 
 mitk:
 	@echo "Start MITK build"
@@ -9,19 +9,24 @@ m2aia:
 	@echo "Start M2aia build"
 	docker build $(ARGS) -t local/m2aia:latest-build -f m2aia-build/Dockerfile m2aia-build/
 
-package: m2aia
+package:
 	@echo "Start M2aia build package provider"
 	docker build $(ARGS) -t m2aia/m2aia:latest-package -f m2aia-package/Dockerfile m2aia-package/ 
-	docker push m2aia/m2aia:latest-package
+	# docker push m2aia/m2aia:latest-package
 
 vnc-base:
 	@echo "Start no-vnc-base build package"
 	docker build $(ARGS) -t local/m2aia:no-vnc-base -f m2aia-no-vnc-base/Dockerfile m2aia-no-vnc-base/
 
-vnc:
+m2aia-vnc:
 	@echo "Start M2aia no-vnc build package"
 	docker build $(ARGS) -t m2aia/m2aia:latest -f m2aia-no-vnc/Dockerfile m2aia-no-vnc/
-	docker push m2aia/m2aia:latest
+	# docker push m2aia/m2aia:latest
+
+mitk-vnc:
+	@echo "Start Mitk no-vnc build package"
+	docker build $(ARGS) -t m2aia/mitk:latest -f mitk-no-vnc/Dockerfile mitk-no-vnc/
+	# docker push m2aia/m2aia:latest
 
 clear:
 	docker rmi \
