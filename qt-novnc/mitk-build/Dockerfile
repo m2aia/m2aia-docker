@@ -63,13 +63,14 @@ FROM base AS mitk-config
 RUN mkdir -p /opt/mitk
 RUN git clone https://github.com/m2aia/mitk /opt/mitk
 RUN git clone https://github.com/m2aia/mitk-elastix /opt/mitk-elastix
+RUN git clone https://github.com/m2aia/mitk-docker /opt/mitk-docker
 
 RUN mkdir -p /opt/build
 WORKDIR /opt/build
 RUN cmake -G Ninja \
     -DCMAKE_BUILD_TYPE:STRING=${CMAKE_BUILD_TYPE} \
     -DBUILD_TESTING:BOOL=${BUILD_TESTING} \
-    -DMITK_EXTENSION_DIRS:STRING=/opt/mitk-elastix . \
+    -DMITK_EXTENSION_DIRS:STRING=/opt/mitk-elastix;/opt/mitk-docker \
     -DMITK_BUILD_CONFIGURATION=WorkbenchRelease \
     -DMITK_USE_MatchPoint:BOOL=ON \
     -S /opt/mitk \
