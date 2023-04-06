@@ -70,7 +70,7 @@ WORKDIR /opt/build
 RUN cmake -G Ninja \
     -DCMAKE_BUILD_TYPE:STRING=${CMAKE_BUILD_TYPE} \
     -DBUILD_TESTING:BOOL=${BUILD_TESTING} \
-    -DMITK_EXTENSION_DIRS:STRING=/opt/mitk-elastix;/opt/mitk-docker \
+    -DMITK_EXTENSION_DIRS:STRING='/opt/mitk-docker;/opt/mitk-elastix' \
     -DMITK_BUILD_CONFIGURATION=WorkbenchRelease \
     -DMITK_USE_MatchPoint:BOOL=ON \
     -S /opt/mitk \
