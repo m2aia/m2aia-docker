@@ -3,6 +3,7 @@ FROM local/m2aia:no-vnc-base
 LABEL IMAGE="qupath"
 LABEL VERSION="0.4.3"
 
+
 WORKDIR /src
 RUN mkdir -p /qupath
 
@@ -12,6 +13,7 @@ RUN mkdir -p /qupath
 RUN wget https://github.com/qupath/qupath/releases/download/v0.4.3/QuPath-0.4.3-Linux.tar.xz -O /src/qupath.tar.xz && \
     tar -xvf /src/qupath.tar.xz --strip 1 -C /qupath/ && rm -rf /src/qupath.tar.gz
 
+RUN sed -i 's/<title>M²aia Online<\/title>/<title>QuPath Online<\/title>/' /usr/local/lib/web/frontend/index.html
 RUN chmod +x /qupath/bin/QuPath*
 
 # Application start definition, here a shell script is used to start the application

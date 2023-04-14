@@ -2,8 +2,8 @@ echo '==============================='
 echo 'Run an awesome M2aia Application'
 echo '==============================='
 # provide writable directory for logs
-echo $M2AIA_LOAD_FILE
-env QTWEBENGINE_DISABLE_SANDBOX=1 /m2aia/M2aiaWorkbench.sh $M2AIA_LOAD_FILE &
+
+env QTWEBENGINE_DISABLE_SANDBOX=1 /m2aia/M2aiaWorkbench.sh $M2AIA_FILE &
 # wait until Workbench is ready
 tail -f  /root/Desktop/logfile | while read LOGLINE
 do
