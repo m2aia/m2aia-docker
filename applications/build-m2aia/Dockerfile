@@ -1,5 +1,4 @@
-ARG BASE_IMAGE=local/mitk:latest-build
-FROM ${BASE_IMAGE} as base
+FROM local.images/mitk/build
 
 ENV BUILD_M2AIA_CLI=OFF
 ENV BUILD_M2AIA_WORKBENCH=ON

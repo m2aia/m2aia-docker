@@ -3,20 +3,19 @@ echo 'Run an awesome QuPath Application'
 echo '==============================='
 
 if [[ -v M2AIA_FILE ]]; then
-	echo '==== LOAD A FILE env /qupath/bin/QuPath.sh -q -i "$M2AIA_FILE" &'
 	env /qupath/bin/QuPath.sh -q -i "$M2AIA_FILE" &
 		# wait until QuPath is ready
 	tail -f  /root/Desktop/logfile | while read LOGLINE
 	do
 		[[ "${LOGLINE}" == *"Image data set to ImageData"* ]] && pkill -P $$ tail
 	done
-elif [[ -v M2AIA_DIRECTORY ]]; then
-	echo '==== LOAD A PROJECT'
-	env /qupath/bin/QuPath.sh -q --project="$M2AIA_DIRECTORY" &
 else
-	echo '==== LOAD WITHOUT PARAMETERS'
-	env /qupath/bin/QuPath.sh -q &
-	# wait until QuPath is ready
+	if [[ -v M2AIA_DIRECTORY ]]; then
+		env /qupath/bin/QuPath.sh -q --project="$M2AIA_DIRECTORY" &
+	else
+		env /qupath/bin/QuPath.sh -q &
+	fi
+	
 	tail -f  /root/Desktop/logfile | while read LOGLINE
 	do
 		[[ "${LOGLINE}" == *"Starting QuPath"* ]] && pkill -P $$ tail

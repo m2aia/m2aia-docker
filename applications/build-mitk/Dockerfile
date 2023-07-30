@@ -1,9 +1,7 @@
-ARG BASE_IMAGE=ubuntu:focal
-FROM ${BASE_IMAGE} as base
+FROM ubuntu:focal
 
 ENV CMAKE_VERSION_A=3.18
 ENV CMAKE_VERSION_B=3.18.2
-
 ENV BUILD_TESTING=OFF
 ENV CMAKE_BUILD_TYPE=Release
 
@@ -59,11 +57,10 @@ RUN curl --silent --location -o cmake-installer.sh https://cmake.org/files/v${CM
     && rm cmake-installer.sh
 
 # Configure MITK
-FROM base AS mitk-config
 RUN mkdir -p /opt/mitk
-RUN git clone https://github.com/m2aia/mitk /opt/mitk
-RUN git clone https://github.com/m2aia/mitk-elastix /opt/mitk-elastix
-RUN git clone https://github.com/m2aia/mitk-docker /opt/mitk-docker
+RUN git clone https://github.com/m2aia/mitk.git /opt/mitk
+RUN git clone https://github.com/m2aia/mitk-elastix.git /opt/mitk-elastix
+RUN git clone https://github.com/m2aia/mitk-docker.git /opt/mitk-docker
 
 RUN mkdir -p /opt/build
 WORKDIR /opt/build
@@ -80,14 +77,6 @@ RUN cmake --build . --parallel --target ITK
 RUN cmake --build . --parallel --target VTK
 RUN cmake --build . --parallel
 
-# RUN cmake \
-    
-#     -S /opt/mitk \
-#     -B /opt/build
-
-# RUN cmake --build .
-
-# MITK package
 WORKDIR /opt/build/MITK-build/
 RUN cmake --build . --target package
 
