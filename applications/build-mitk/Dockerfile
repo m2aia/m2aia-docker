@@ -58,7 +58,7 @@ RUN curl --silent --location -o cmake-installer.sh https://cmake.org/files/v${CM
 
 # Configure MITK
 RUN mkdir -p /opt/mitk
-RUN git clone https://github.com/m2aia/mitk.git /opt/mitk
+RUN git clone https://github.com/m2aia/mitk-m2aia.git /opt/mitk
 RUN git clone https://github.com/m2aia/mitk-elastix.git /opt/mitk-elastix
 RUN git clone https://github.com/m2aia/mitk-docker.git /opt/mitk-docker
 
