@@ -14,6 +14,7 @@ RUN git clone https://github.com/m2aia/m2aia -b ${BUILD_M2AIA_BRANCH} /opt/m2aia
 WORKDIR /opt/build
 RUN cmake -DMITK_EXTENSION_DIRS:STRING='/opt/mitk-docker;/opt/mitk-elastix;/opt/m2aia' .
 RUN cmake -DMITK_BUILD_CONFIGURATION=M2aiaRelease .
+RUN cmake -DMITK_BUILD_DOCKER:BOOL=OFF 
 RUN cmake --build .
 
 WORKDIR /opt/build/MITK-build
