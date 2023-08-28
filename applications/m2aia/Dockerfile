@@ -1,12 +1,12 @@
 
-ARG M2AIA_VERSION="v2023.08"
+ARG M2AIA_VERSION="latest"
 FROM ghcr.io/m2aia/packages:${M2AIA_VERSION} as packages
 
-FROM local/images/no-vnc/mitk
+FROM local/images/no-vnc/mitk:${M2AIA_VERSION}
 
 # Add labels to identify the image and its version
-LABEL IMAGE="m2aia"
-LABEL VERSION="latest"
+LABEL IMAGE="M2aiaOnline"
+LABEL VERSION=${M2AIA_VERSION}
 
 ARG ELASTIX_VERSION="5.0.0"
 ENV ELASTIX_VERSION=$ELASTIX_VERSION

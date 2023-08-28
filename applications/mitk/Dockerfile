@@ -1,11 +1,10 @@
-ARG M2AIA_VERSION="v2023.08"
+ARG M2AIA_VERSION="latest"
 FROM ghcr.io/m2aia/packages:${M2AIA_VERSION} as packages
 
-FROM local/images/no-vnc/mitk
+FROM local/images/no-vnc/mitk:${M2AIA_VERSION}
 
-LABEL IMAGE="mitk-workbench"
-LABEL VERSION="2022.10"
-LABEL CI_IGNORE="False"
+LABEL IMAGE="MitkOnline"
+LABEL VERSION=${M2AIA_VERSION}
 ENV ELASTIX_VERSION="5.0.0"
 
 WORKDIR /src
