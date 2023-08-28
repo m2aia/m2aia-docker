@@ -1,4 +1,4 @@
-FROM local.images/no-vnc/mitk
+FROM local/images/no-vnc/mitk
 
 # Add labels to identify the image and its version
 LABEL IMAGE="m2aia"

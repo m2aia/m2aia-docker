@@ -1,4 +1,4 @@
-FROM local.images/no-vnc/base
+FROM local/images/no-vnc/base
 
 RUN apt-get autoremove
 RUN apt-get update --fix-missing

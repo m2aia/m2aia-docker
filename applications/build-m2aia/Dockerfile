@@ -1,4 +1,4 @@
-FROM local.images/mitk/build
+FROM local/images/mitk/build
 
 ARG BUILD_M2AIA_BRANCH
 ENV BUILD_M2AIA_BRANCH=${BUILD_M2AIA_BRANCH:-main}
