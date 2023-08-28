@@ -1,4 +1,7 @@
-FROM local/m2aia:no-vnc-base
+ARG M2AIA_VERSION="v2023.08"
+FROM ghcr.io/m2aia/packages:${M2AIA_VERSION} as packages
+
+FROM local/images/no-vnc/mitk
 
 LABEL IMAGE="mitk-workbench"
 LABEL VERSION="2022.10"
@@ -11,7 +14,7 @@ RUN mkdir -p /mitk
 RUN wget https://github.com/SuperElastix/elastix/releases/download/${ELASTIX_VERSION}/elastix-${ELASTIX_VERSION}-linux.tar.bz2 -O /src/elastix.tar.bz2
 RUN tar -xvjf /src/elastix.tar.bz2 -C /usr/ && rm -rf /src/elastix.tar.bz2
 
-COPY --from=ghcr.io/m2aia/m2aia:latest-package /opt/packages/mitk.tar.gz /src/mitk.tar.gz
+COPY --from=packages /opt/packages/mitk.tar.gz /src/mitk.tar.gz
 RUN tar -xzf /src/mitk.tar.gz --strip 1 -C /mitk/ && rm -rf /src/mitk.tar.gz
 
 # RUN wget https://www.mitk.org/download/kaapana/workbench/MITK-v2022.10-linux-x86_64.tar.gz -O /src/mitk.tar.gz && \

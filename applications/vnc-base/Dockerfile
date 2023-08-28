@@ -113,7 +113,7 @@ COPY /files/requirements.txt /tmp
 RUN apt-get update \
     && dpkg-query -W -f='${Package}\n' > /tmp/a.txt \
     && apt-get install -y python3-pip python3-dev build-essential \
-	&& pip3 install setuptools wheel && pip3 install -r /tmp/requirements.txt  -c https://raw.githubusercontent.com/kaapana/kaapana/develop/build-scripts/constraints-0.1.3.txt \
+	&& pip3 install setuptools wheel && pip3 install -r /tmp/requirements.txt  -c https://raw.githubusercontent.com/kaapana/kaapana/0.2.1/build-scripts/constraints-0.2.1.txt \
     && ln -s /usr/bin/python3 /usr/local/bin/python \
     && dpkg-query -W -f='${Package}\n' > /tmp/b.txt \
     && apt-get remove -y `diff --changed-group-format='%>' --unchanged-group-format='' /tmp/a.txt /tmp/b.txt | xargs` \
@@ -155,11 +155,32 @@ RUN apt-get update -y && apt-get install -y --no-install-recommends \
     libxt-dev \
     libgomp1 \
     xvfb \
+    qtbase5-dev \
+    qtscript5-dev \
+    libqt5svg5-dev \
+    libqt5opengl5-dev \
+    libqt5xmlpatterns5-dev \
+    qtwebengine5-dev \
+    qttools5-dev \
+    libqt5x11extras5-dev \
+    qtxmlpatterns5-dev-tools \
+    libqt5webengine-data \
     at-spi2-core \
     gedit \
     python3-pip \
     && rm -rf /var/lib/apt/lists/*
     
+
+RUN pip install -c https://raw.githubusercontent.com/kaapana/kaapana/0.2.1/build-scripts/constraints-0.2.1.txt --no-cache-dir \
+    # Security fix for CVE-2021-33503
+    urllib3==1.26.5 \
+    # Security fix for CVE-2022-40898
+    wheel==0.38.1 \
+    # Security fix for CVE-2023-25577
+    Werkzeug==2.2.3 \
+    # Werkzeug 2.0.0+ breaks Flask
+    Flask==2.2.3 \
+    Jinja2==3.1.2
 
 COPY files/startup.sh /startup.sh
 
