@@ -11,8 +11,8 @@
 CR_URL?=ghcr.io/
 CR_USERNAME?=
 CR_PAT?=
-M2AIA_VERSION?=latest
-M2AIA_BRANCH?=develop
+M2AIA_VERSION?=ERROR
+M2AIA_BRANCH?=ERROR
 DOCKER_BUILD_ARGS?=
 
 # Application builders
