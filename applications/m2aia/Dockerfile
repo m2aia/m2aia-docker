@@ -1,4 +1,3 @@
-
 ARG M2AIA_VERSION="latest"
 FROM ghcr.io/m2aia/packages:${M2AIA_VERSION} as packages
 

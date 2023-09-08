@@ -1,4 +1,5 @@
-FROM local/images/no-vnc/base
+ARG M2AIA_VERSION
+FROM local/images/no-vnc/base:${M2AIA_VERSION}
 
 RUN apt-get autoremove
 RUN apt-get update --fix-missing
