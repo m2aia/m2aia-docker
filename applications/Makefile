@@ -30,10 +30,10 @@ build-pym2aia: build-package
 
 # Base images for vnc access
 vnc-base:
-	docker build $(DOCKER_BUILD_ARGS) -t local/images/no-vnc/base:$(M2AIA_VERSION) vnc-base/
+	docker build $(DOCKER_BUILD_ARGS) --build-arg M2AIA_VERSION=$(M2AIA_VERSION) -t local/images/no-vnc/base:$(M2AIA_VERSION) vnc-base/
 
 vnc-mitk: vnc-base
-	docker build $(DOCKER_BUILD_ARGS) -t local/images/no-vnc/mitk:$(M2AIA_VERSION) vnc-mitk/
+	docker build $(DOCKER_BUILD_ARGS) --build-arg M2AIA_VERSION=$(M2AIA_VERSION) -t local/images/no-vnc/mitk:$(M2AIA_VERSION) vnc-mitk/
 
 # Interactive NoVNC Applications
 m2aia: vnc-mitk build-package
