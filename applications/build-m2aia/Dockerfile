@@ -1,15 +1,15 @@
 ARG M2AIA_VERSION
 FROM local/images/mitk/build:${M2AIA_VERSION} as build-m2aia
 
-ARG BUILD_M2AIA_BRANCH
-ENV BUILD_M2AIA_BRANCH=${BUILD_M2AIA_BRANCH:-develop}
+ARG M2AIA_BRANCH
+ENV M2AIA_BRANCH=${M2AIA_BRANCH:-develop}
 
 ENV BUILD_M2AIA_CLI=OFF
 ENV BUILD_M2AIA_WORKBENCH=ON
 ENV BUILD_MITK_WORKBENCH=OFF
 
 RUN mkdir -p /opt/m2aia
-RUN git clone https://github.com/m2aia/m2aia -b ${BUILD_M2AIA_BRANCH} /opt/m2aia
+RUN git clone https://github.com/m2aia/m2aia -b ${M2AIA_BRANCH} /opt/m2aia
 
 WORKDIR /opt/build
 RUN cmake -DMITK_EXTENSION_DIRS:STRING='/opt/mitk-docker;/opt/mitk-elastix;/opt/m2aia' .
