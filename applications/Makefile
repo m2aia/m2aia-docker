@@ -20,7 +20,7 @@ build-mitk:
 	docker build $(DOCKER_BUILD_ARGS) -t local/images/mitk/build:$(M2AIA_VERSION) build-mitk/
 
 build-m2aia: build-mitk
-	docker build $(DOCKER_BUILD_ARGS) --build-arg M2AIA_VERSION=$(M2AIA_VERSION) --build-arg BUILD_M2AIA_BRANCH=$(M2AIA_BRANCH) -t local/images/m2aia/build:$(M2AIA_VERSION) build-m2aia/
+	docker build $(DOCKER_BUILD_ARGS) --build-arg M2AIA_VERSION=$(M2AIA_VERSION) --build-arg M2AIA_BRANCH=$(M2AIA_BRANCH) -t local/images/m2aia/build:$(M2AIA_VERSION) build-m2aia/
 
 build-package: build-m2aia
 	docker build $(DOCKER_BUILD_ARGS) --build-arg M2AIA_VERSION=$(M2AIA_VERSION) -t $(CR_URL)m2aia/packages:$(M2AIA_VERSION) build-package/ 
